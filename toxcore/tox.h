@@ -448,6 +448,19 @@ int tox_group_action_send(Tox *tox, int groupnumber, uint8_t *action, uint32_t l
  * return -1 on failure
  */
 int tox_group_number_peers(Tox *tox, int groupnumber);
+    
+/* returns the group number of the chat with public key group_public_key.
+ * returns -1 on failure.
+ */
+int tox_group_get_num(Tox *tox, uint8_t *group_public_key);
+    
+/* Copies the public key associated to that group id into group_id buffer.
+ * Make sure that group_id is of size crypto_box_PUBLICKEYBYTES.
+ *
+ *  return 0 if success.
+ *  return -1 if failure.
+ */
+int tox_group_get_id(Tox *tox, int32_t groupnumber, uint8_t *group_id);
 
 /* List all the peers in the group chat.
  *

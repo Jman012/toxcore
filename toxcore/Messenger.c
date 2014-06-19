@@ -121,6 +121,7 @@ int getclient_id(Messenger *m, int32_t friendnumber, uint8_t *client_id)
 
     return -1;
 }
+
 /* TODO: Another checksum algorithm might be better.
  *
  *  return a uint16_t that represents the checksum of address of length len.
@@ -911,6 +912,25 @@ static int group_num(Messenger *m, uint8_t *group_public_key)
                 return i;
     }
 
+    return -1;
+}
+
+/* Copies the public key associated to that group id into group_id buffer.
+ * Make sure that group_id is of size crypto_box_PUBLICKEYBYTES.
+ *
+ *  return 0 if success.
+ *  return -1 if failure.
+ */
+static int getgroup_id(Messenger *m, int32_t groupnumber, uint8_t *group_id)
+{
+    if (groupnumber_not_valid(m, groupnumber))
+        return -1;
+    
+    if (m->chats[groupnumber]) {
+        memcpy(group_id, m->chats[friendnumber].self_public_key, crypto_box_PUBLICKEYBYTES);
+        return 0;
+    }
+    
     return -1;
 }
 

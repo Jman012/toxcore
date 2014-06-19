@@ -614,6 +614,19 @@ int group_number_peers(Messenger *m, int groupnumber);
  */
 int group_names(Messenger *m, int groupnumber, uint8_t names[][MAX_NICK_BYTES], uint16_t lengths[], uint16_t length);
 
+/* returns the group number of the chat with public key group_public_key.
+ * returns -1 on failure.
+ */
+static int group_num(Messenger *m, uint8_t *group_public_key);
+
+/* Copies the public key associated to that group id into group_id buffer.
+ * Make sure that group_id is of size crypto_box_PUBLICKEYBYTES.
+ *
+ *  return 0 if success.
+ *  return -1 if failure.
+ */
+static int getgroup_id(Messenger *m, int32_t groupnumber, uint8_t *group_id);
+
 /****************FILE SENDING*****************/
 
 
